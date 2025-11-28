@@ -218,6 +218,16 @@
     ],
     "components": [
         {
+            "key": "features-bar-component",
+            "title": {
+                "en": "Store Features Bar",
+                "ar": "شريط مميزات المتجر"
+            },
+            "icon": "sicon-star",
+            "path": "home.features-bar",
+            "fields": []
+        },
+        {
             "key": "186b3f4f-25cf-4d3c-abca-cef7eed6f0ab",
             "title": {
                 "en": "Enhances Animated Images",

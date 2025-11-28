@@ -82,10 +82,20 @@
     <style>
         :root {
             --font-main: '{{theme.font.name}}';
-            --color-primary: {{ theme.color.primary }};
-            --color-primary-dark: {{ theme.color.darker(0.15) }};
-            --color-primary-light: {{ theme.color.lighter(0.15) }};
-            --color-primary-reverse: {{ theme.color.reverse_text }};
+            /* Premium Slate Palette */
+            --color-primary: #0f172a; /* Slate 900 */
+            --color-primary-dark: #020617; /* Slate 950 */
+            --color-primary-light: #334155; /* Slate 700 */
+            --color-primary-reverse: #ffffff;
+            
+            --color-secondary: #3b82f6; /* Blue 500 */
+            --color-secondary-dark: #1d4ed8; /* Blue 700 */
+            --color-secondary-light: #60a5fa; /* Blue 400 */
+            
+            --color-accent: #10b981; /* Emerald 500 */
+            --color-text-main: #1e293b; /* Slate 800 */
+            --color-text-muted: #64748b; /* Slate 500 */
+            --color-bg-light: #f8fafc; /* Slate 50 */
         }
     </style>
     {# tracking services, custom css feature. #}
@@ -111,6 +121,21 @@
     {% component 'footer.footer' %}
     {% include 'components.cart.cart-drawer' %}
 </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "{{ store.name }}",
+  "image": "{{ store.logo }}",
+  "description": "{{ store.description }}",
+  "url": "{{ store.url }}",
+  "telephone": "{{ store.contacts.mobile }}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "SA"
+  }
+}
+</script>
 {% hook 'body:end' %}
 <script defer src="{{ 'app.js' | asset }}"></script>
 

@@ -1,42 +1,61 @@
-<footer class="store-footer bg-gray-900 text-gray-300 pt-16 pb-8">
+<footer class="store-footer bg-gray-900 text-gray-300 pt-16 pb-8 border-t border-gray-800">
     <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            {# Column 1: About & Social #}
-            <div class="space-y-6">
+        {# Newsletter Section - Professional Addition #}
+        <div class="mb-16 bg-gray-800/30 rounded-2xl p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 border border-gray-700/50 backdrop-blur-sm">
+            <div class="text-center lg:text-start max-w-lg">
+                <h3 class="text-2xl font-bold text-white mb-2">{{ trans('blocks.home.subscribe_title', 'Join our Newsletter') }}</h3>
+                <p class="text-gray-400 text-sm">{{ trans('blocks.home.subscribe_sub_title', 'Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.') }}</p>
+            </div>
+            <div class="w-full max-w-md">
+                <form class="relative" onsubmit="return false;">
+                    <input type="email" placeholder="{{ trans('common.elements.email_address') }}" class="w-full h-12 pl-4 pr-32 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors" required>
+                    <button type="submit" class="absolute top-1 right-1 bottom-1 bg-secondary hover:bg-secondary-dark text-white px-6 rounded-md font-medium text-sm transition-colors duration-300">
+                        {{ trans('common.actions.subscribe') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16 border-b border-gray-800 pb-16">
+            {# Column 1: Brand (4 cols) #}
+            <div class="lg:col-span-4 space-y-6">
                 <a href="{{ link('/') }}" class="block">
-                    <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-12 object-contain brightness-0 invert opacity-90">
+                    <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-12 object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity">
                 </a>
                 {% if store.description %}
-                    <p class="text-sm leading-relaxed text-gray-400">
+                    <p class="text-sm leading-relaxed text-gray-400 max-w-xs">
                         {{ store.description|raw }}
                     </p>
                 {% endif %}
                 <div class="pt-4">
-                    <salla-social class="flex gap-4 text-gray-400 hover:text-white transition-colors"></salla-social>
+                    <salla-social class="flex gap-4 text-gray-400 hover:text-white transition-colors text-lg"></salla-social>
                 </div>
             </div>
 
-            {# Column 2: Quick Links #}
-            <div>
-                <h3 class="text-white font-bold text-lg mb-6">{{ trans('blocks.footer.pages_links') }}</h3>
+            {# Column 2: Quick Links (2 cols) #}
+            <div class="lg:col-span-2">
+                <h3 class="text-white font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:right-0 after:w-8 after:h-0.5 after:bg-secondary after:rounded-full">{{ trans('blocks.footer.pages_links') }}</h3>
                 <salla-menu source="footer" class="flex flex-col gap-3 text-sm text-gray-400 hover:text-white transition-colors"></salla-menu>
             </div>
 
-            {# Column 3: Contact & Support #}
-            <div>
-                <h3 class="text-white font-bold text-lg mb-6">{{ trans('common.titles.contact_us') }}</h3>
+            {# Column 3: Contact (3 cols) #}
+            <div class="lg:col-span-3">
+                <h3 class="text-white font-bold text-lg mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:right-0 after:w-8 after:h-0.5 after:bg-secondary after:rounded-full">{{ trans('common.titles.contact_us') }}</h3>
                 <salla-contacts class="flex flex-col gap-4 text-sm text-gray-400"></salla-contacts>
             </div>
 
-            {# Column 4: Trust & Apps #}
-            <div class="space-y-8">
+            {# Column 4: Trust & Apps (3 cols) #}
+            <div class="lg:col-span-3 space-y-8">
                 {# Apps #}
-                <salla-apps-icons></salla-apps-icons>
+                <div>
+                     <h4 class="text-white font-bold text-sm mb-4">{{ trans('common.titles.download_app', 'Download App') }}</h4>
+                     <salla-apps-icons></salla-apps-icons>
+                </div>
                 
                 {# Trust Badges #}
                 <div>
                     <h4 class="text-white font-bold text-sm mb-4">{{ trans('common.titles.guaranteed_by') }}</h4>
-                    <salla-trust-badges dark></salla-trust-badges>
+                    <salla-trust-badges dark class="opacity-90 hover:opacity-100 transition-opacity"></salla-trust-badges>
                 </div>
 
                 {# VAT #}
@@ -44,12 +63,12 @@
                     <div class="flex items-center gap-3 pt-4 border-t border-gray-800">
                         {% if store.settings.tax.certificate %}
                             <a class="load-img-onclick" data-modal-id="modal-value-tax" href="#/">
-                                <img src="{{ 'images/tax.png' | cdn(70,70) }}" class="w-8 h-auto opacity-70 hover:opacity-100 transition-opacity" alt="VAT">
+                                <img src="{{ 'images/tax.png' | cdn(70,70) }}" class="w-8 h-auto opacity-60 hover:opacity-100 transition-opacity" alt="VAT">
                             </a>
                         {% endif %}
                         <div>
                             <p class="text-xs text-gray-500">{{ trans('common.elements.tax_number') }}</p>
-                            <p class="text-sm font-mono text-gray-300">{{ store.settings.tax.number }}</p>
+                            <p class="text-sm font-mono text-gray-300 tracking-wider">{{ store.settings.tax.number }}</p>
                         </div>
                     </div>
                 {% endif %}
@@ -57,11 +76,13 @@
         </div>
 
         {# Copyright & Payments #}
-        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
             <p class="text-sm text-gray-500">
                 {% hook copyright %}
             </p>
-            <salla-payments></salla-payments>
+            <div class="grayscale hover:grayscale-0 transition-all duration-500 opacity-70 hover:opacity-100">
+                <salla-payments></salla-payments>
+            </div>
         </div>
     </div>
 </footer>

@@ -7,9 +7,9 @@ module.exports = {
         'node_modules/@salla.sa/twilight-tailwind-theme/safe-list-css.txt',
     ],
     darkMode: 'class', // or 'media' or 'class'
-    theme   : {
-        container : {
-            center : true,
+    theme: {
+        container: {
+            center: true,
             padding: '1rem',
             screens: {
                 '2xl': "1280px"
@@ -28,7 +28,7 @@ module.exports = {
             ],
             primary: "var(--font-main)"
         },
-        extend    : {
+        extend: {
             colors: {
                 primary: {
                     DEFAULT: 'var(--color-primary)',
@@ -40,6 +40,10 @@ module.exports = {
                     light: 'var(--color-secondary-light)',
                     dark: 'var(--color-secondary-dark)',
                 },
+                accent: 'var(--color-accent)',
+                'text-main': 'var(--color-text-main)',
+                'text-muted': 'var(--color-text-muted)',
+                'bg-light': 'var(--color-bg-light)',
                 success: '#10B981',
                 warning: '#F59E0B',
                 danger: '#EF4444',
@@ -62,23 +66,23 @@ module.exports = {
             },
             spacing: {
                 '3.75': '0.9375rem', // 15px
-                '7.5' : '1.875rem',  // 30px
+                '7.5': '1.875rem',  // 30px
                 '18': '4.5rem',
                 '22': '5.5rem',
-                '58'  : '14.5rem',
-                '62'  : '15.5rem',
+                '58': '14.5rem',
+                '62': '15.5rem',
                 '74': '18.5rem',
                 '76': '19rem',
                 '78': '19.5rem',
-                '100' : '25rem',
-                '116' : '29rem',
-                '132' : '33rem',
-                '200' : '50rem',
+                '100': '25rem',
+                '116': '29rem',
+                '132': '33rem',
+                '200': '50rem',
             },
             borderRadius: {
                 'large': '1.375rem', // 22px
-                'big'  : '2.5rem',   // 40px
-                'tiny' : '0.1875rem', // 3px
+                'big': '2.5rem',   // 40px
+                'tiny': '0.1875rem', // 3px
                 DEFAULT: '0.75rem',
             },
             fontSize: {
@@ -96,7 +100,7 @@ module.exports = {
                 'title-size': '2.625rem', // 42px
             },
             boxShadow: {
-                'default' : '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+                'default': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
                 'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
                 'card': '0 0 20px rgba(0, 0, 0, 0.05)',
                 'dropdown': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
@@ -140,11 +144,11 @@ module.exports = {
         },
     },
     corePlugins: {
-      outline: false,
+        outline: false,
     },
     plugins: [
-      require('@salla.sa/twilight-tailwind-theme'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/line-clamp'),
+        require('@salla.sa/twilight-tailwind-theme'),
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/line-clamp'),
     ],
 }
