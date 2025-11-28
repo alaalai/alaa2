@@ -109,6 +109,7 @@
     {% block content %}{% endblock %}
     </main>
     {% component 'footer.footer' %}
+    {% include 'components.cart.cart-drawer' %}
 </div>
 {% hook 'body:end' %}
 <script defer src="{{ 'app.js' | asset }}"></script>

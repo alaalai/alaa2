@@ -372,41 +372,6 @@
                             <div class="sticky-product-bar__quantity center-between mb-5">
                                 <label class="form-label font-bold">
                                     {{ trans('pages.products.quantity') }}
-                                </label>
-                                <salla-quantity-input max="{{ product.max_quantity }}" value="1" name="quantity" aria-label="Quantity"
-                                  class="border-gray-200 flex justify-end"></salla-quantity-input>
-                            </div>
-                        {% endif %}
-                        {# Add to cart #}
-                        <salla-add-product-button
-                                {{product.can_quick_buy ? 'quick-buy' : ''}}
-                                {{theme.settings.get('sticky_add_to_cart') ? ' support-sticky-bar' : ''}}
-                                {{product.is_require_shipping ? 'required-shipping' : ''}}
-                                {{product.has_preorder_campaign ? 'has-pre-order' : ''}}
-                                amount="{{ product.base_currency_price }}"
-                                class="mt-5 w-full sticky-product-bar__btn"
-                                product-status="{{ product.status }}"
-                                product-type="{{ product.type }}"
-                                product-id="{{ product.id }}"
-                                loader-position="end"
-                                type="submit"
-                                width="wide"
-                                {# Notify availability props#}
-                                {% if product.notify_availability %}
-                                    {{ product.notify_availability.subscribed ? 'is-subscribed' : '' }}
-                                    channels="{{ product.notify_availability.channels|join(',') }}"
-                                    subscribed-options="{{ product.notify_availability.subscribed_options|json_encode }}"
-                                    {{ product.notify_availability.options ? 'notify-options-availability' : '' }}
-                                {% endif %}>
-
-                            {{ product.add_to_cart_label }}
-                        </salla-add-product-button>
-                    </section>
-                    {% if product.is_giftable %}
-                        <salla-gifting class="mt-5" widget-subtitle="{{ gifting_intro }}" product-id="{{ product.id }}" {{ product.is_require_shipping ? 'physical-products' : ''  }}></salla-gifting>
-                    {% endif %}
-                </form>
-
                 {% hook 'product:single.description.end' %}
                 <salla-quick-order class="mt-5 md:-mb-2 block"></salla-quick-order>
             </div>

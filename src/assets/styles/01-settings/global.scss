@@ -9,9 +9,21 @@ $main-text-color: var(--main-text-color);
   --main-text-color: #231f1e;
   --main-text-color-dark: #2b2d34;
 
-  /* current */
+  /* Brand Colors */
   --color-primary: #5cd5c4;
-  --color-primary: #414042;
+  --color-primary-light: #8be4d8;
+  --color-primary-dark: #4ab3a3;
+  
+  --color-secondary: #2d3748;
+  --color-secondary-light: #4a5568;
+  --color-secondary-dark: #1a202c;
+
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Legacy/Existing variables - kept for compatibility */
   --color-primary-d: #272628;
   --color-primary-l: #676668;
   --color-primary-reverse: #ff6767;
@@ -19,11 +31,11 @@ $main-text-color: var(--main-text-color);
   --bg-gray: #c6c7ce1a;
   --color-grey: #f5f7f9;
   --color-light-grey: #eeeeee;
-  /* font-size */
-  --font-sm: 0.8685714286rem;
-  /* font-family: ; */
-  --font-main: "DINNextLTArabic";
+  
+  /* Typography */
+  --font-sm: 0.875rem;
+  --font-main: "DINNextLTArabic", sans-serif;
 
-  /* plugins */
+  /* Plugins */
   --mm-ocd-width: calc(100% - 51px);
 }

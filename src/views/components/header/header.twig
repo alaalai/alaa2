@@ -6,81 +6,91 @@
 | cart.total       | string  | Formatted total ex: "١٠٠ ر.س"   |
 #}
 {% set important_links = theme.settings.get('important_links') %}
-<header class="store-header">
-  {# Top Nav #}
-  <div class="top-navbar">
-    <div class="container flex justify-between">
-      <div class="flex-1 flex items-center gap-2">
-          {# Footer Menu #}
-          {% if important_links %}
-            <salla-menu source="footer" topnav></salla-menu>
-          {% endif %}
 
-          {# Language & Currency Component #}
-          <div class="header-buttons">
-              {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
-                  <button type="button" onclick="salla.event.dispatch('localization::open')" class="btn--rounded-gray basis-0">
-                      <span>{{ user.language.name }}</span>
-                      <span class="mx-1.5">|</span> <span>{{ currency.symbol }}</span>
-                  </button>
-                  <salla-localization-modal></salla-localization-modal>
-              {% endif %}
-          </div>
-
-          {# Scopes | Branches #}
-          {% if store.scope %}
-              <button class="btn--rounded-gray"
-                      onclick="salla.event.dispatch('scopes::open', {'mode': 'default'})">
-                  <i class="sicon-location rtl:ml-1 ltr:mr-1"></i> {{ store.scope.name }}
-              </button>
-          {% endif %}
-
-          {# Search bar #}
-          <div class="header-search flex-1">
-            <salla-search inline oval height="36"></salla-search>
-          </div>
+<header class="store-header sticky top-0 z-50 bg-white shadow-sm transition-all duration-300" id="main-header">
+  {# Top Bar - Optional #}
+  {% if important_links or store.settings.is_multilingual or store.settings.currencies_enabled %}
+  <div class="bg-gray-50 border-b border-gray-100 py-1 text-xs hidden md:block">
+    <div class="container flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        {% if important_links %}
+          <salla-menu source="footer" topnav class="flex gap-4 text-gray-500 hover:text-primary transition-colors"></salla-menu>
+        {% endif %}
       </div>
-
-      <salla-contacts is-header></salla-contacts>
+      <div class="flex items-center gap-4">
+         <salla-contacts is-header class="flex gap-2 text-gray-400"></salla-contacts>
+         
+         {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
+            <button type="button" onclick="salla.event.dispatch('localization::open')" class="flex items-center gap-1 text-gray-500 hover:text-primary">
+                <span>{{ user.language.name }}</span>
+                <span class="mx-1">|</span> 
+                <span>{{ currency.symbol }}</span>
+                <i class="sicon-keyboard_arrow_down text-xs"></i>
+            </button>
+            <salla-localization-modal></salla-localization-modal>
+         {% endif %}
+      </div>
     </div>
   </div>
+  {% endif %}
 
-  {# Main Nav #}
-  <div id="mainnav" class="main-nav-container shadow-default bg-white flex items-center">
-      <div class="inner bg-inherit w-full">
-          <div class="container">
-              <div class="flex items-stretch justify-between relative">
-                  <div class="flex items-center">
-                      <a class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-primary text-2xl"></i>
-                      </a>
-                      <a class="navbar-brand" href="{{ store.url }}">
-                          <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo }}" alt="{{ store.name }} logo">
-                          {% if is_page('index') %}
-                            <h1 class="sr-only">{{ store.name }}</h1>
-                          {% else %}
-                            <h2 class="sr-only">{{ store.name }}</h2>
-                          {% endif %}
-                      </a>
-                      <custom-main-menu></custom-main-menu>
-                  </div>
-                  <div class="flex items-center justify-end my-2.5">
-                      {% if user.type=='user' %}
-                        <salla-user-menu avatar-only show-header></salla-user-menu>
-                      {% else %}
-                          <button class="header-btn" aria-label="user-icon" onclick="salla.event.dispatch('login::open')">
-                            <i class="header-btn__icon sicon-user-circle"></i>
-                          </button>
-                      {% endif %}
-                      <salla-cart-summary class="ml-4 rtl:ml-[unset] rtl:mr-4">
-                        <i slot="icon" class="header-btn__icon icon sicon-shopping-bag"></i>
-                      </salla-cart-summary>
-                  </div>
+  {# Main Header #}
+  <div class="container py-3 md:py-4">
+      <div class="flex items-center justify-between gap-4 md:gap-8">
+          {# Logo & Mobile Menu #}
+          <div class="flex items-center gap-4 shrink-0">
+              <button class="lg:hidden text-gray-700 hover:text-primary transition-colors p-1" onclick="salla.event.dispatch('mobile-menu::open')" aria-label="Open menu">
+                <i class="sicon-menu text-2xl"></i>
+              </button>
+              
+              <a class="block w-24 md:w-32 lg:w-40 transition-transform hover:scale-105" href="{{ store.url }}">
+                  <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo }}" alt="{{ store.name }} logo" class="object-contain max-h-12 md:max-h-16">
+                  {% if is_page('index') %}
+                    <h1 class="sr-only">{{ store.name }}</h1>
+                  {% else %}
+                    <h2 class="sr-only">{{ store.name }}</h2>
+                  {% endif %}
+              </a>
+          </div>
+
+          {# Desktop Menu #}
+          <div class="hidden lg:block flex-1 px-4">
+             <custom-main-menu class="flex justify-center gap-6 text-sm font-medium text-gray-700"></custom-main-menu>
+          </div>
+
+          {# Search & Actions #}
+          <div class="flex items-center gap-2 md:gap-4 shrink-0">
+              {# Search #}
+              <div class="hidden md:block w-64 xl:w-80">
+                <salla-search inline oval height="40" class="w-full"></salla-search>
               </div>
+              <button class="md:hidden text-gray-700 hover:text-primary p-2" onclick="salla.event.dispatch('search::open')">
+                <i class="sicon-search text-xl"></i>
+              </button>
+
+              {# User Menu #}
+              {% if user.type=='user' %}
+                <salla-user-menu avatar-only show-header class="text-gray-700 hover:text-primary"></salla-user-menu>
+              {% else %}
+                  <button class="text-gray-700 hover:text-primary p-2 transition-colors" aria-label="Login" onclick="salla.event.dispatch('login::open')">
+                    <i class="sicon-user-circle text-2xl"></i>
+                  </button>
+              {% endif %}
+
+              {# Cart #}
+              <salla-cart-summary class="ml-0">
+                <div slot="icon" class="relative text-gray-700 hover:text-primary p-2 transition-colors cursor-pointer">
+                    <i class="sicon-shopping-bag text-2xl"></i>
+                    <span class="badge absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                        {{ cart.items_count }}
+                    </span>
+                </div>
+              </salla-cart-summary>
           </div>
       </div>
   </div>
 </header>
+
 {% if store.scope %}
     <salla-scopes selection="{{ store.scope.display_as == 'popup' ? 'mandatory' : 'optional' }}"></salla-scopes>
 {% endif %}

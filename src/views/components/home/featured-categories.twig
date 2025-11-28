@@ -1,0 +1,31 @@
+{#
+| Variable      | Type   | Description                                                      |
+|---------------|--------|------------------------------------------------------------------|
+| items[]       | array  | List of categories                                               |
+| items[].image | string | Category image url                                               |
+| items[].title | string | Category title                                                   |
+| items[].url   | string | Category url                                                     |
+#}
+<section class="py-16">
+    <div class="container">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800">{{ trans('blocks.home.browse_categories')|default('تصفح حسب القسم') }}</h2>
+            <a href="{{ link('/categories') }}" class="text-primary hover:text-primary-dark font-medium flex items-center gap-1 transition-colors">
+                {{ trans('blocks.home.view_all')|default('عرض الكل') }}
+                <i class="sicon-keyboard_arrow_left text-xs rtl:rotate-180"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            {% for item in items|slice(0, 6) %}
+                <a href="{{ item.url }}" class="group block text-center">
+                    <div class="relative aspect-square rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 group-hover:text-primary transition-colors">{{ item.title }}</h3>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
