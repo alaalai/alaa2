@@ -1,26 +1,83 @@
-<section class="relative bg-gray-900 overflow-hidden h-[500px] md:h-[600px] flex items-center">
-    {# Background Image #}
+<section class="relative h-[85vh] min-h-[600px] w-full overflow-hidden bg-slate-900 group">
+    {# Background Media #}
     <div class="absolute inset-0 z-0">
-        <img src="{{ 'images/hero-bg.jpg' | asset }}" alt="Hero Background" class="w-full h-full object-cover opacity-60">
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop" 
+             alt="Hero Background" 
+             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[20s] ease-linear">
     </div>
 
-    <div class="container relative z-10">
-        <div class="max-w-2xl text-white">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 animate-slideUp">
-                {{ trans('blocks.home.hero_title')|default('اكتشف تشكيلتنا الجديدة') }}
+    {# Content #}
+    <div class="container relative z-20 h-full flex items-center">
+        <div class="max-w-3xl opacity-0 animate-fadeInUp" style="animation-fill-mode: forwards; animation-delay: 0.5s;">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-6">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span class="text-sm font-medium">{{ trans('blocks.home.new_collection')|default('New Collection 2025') }}</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
+                {{ trans('blocks.home.hero_title')|default('Elevate Your Style') }}
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 block mt-2">
+                    {{ trans('blocks.home.hero_subtitle_highlight')|default('Beyond Ordinary') }}
+                </span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed animate-slideUp" style="animation-delay: 0.1s;">
-                {{ trans('blocks.home.hero_description')|default('تسوق أحدث المنتجات العصرية بجودة عالية وأسعار منافسة.') }}
+            
+            <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl">
+                {{ trans('blocks.home.hero_description')|default('Discover our meticulously curated collection of premium products designed to enhance your lifestyle. Quality, comfort, and elegance in every detail.') }}
             </p>
-            <div class="flex flex-wrap gap-4 animate-slideUp" style="animation-delay: 0.2s;">
-                <a href="{{ link('/products') }}" class="btn btn--primary btn--rounded-full px-8 py-4 text-lg min-w-[160px]">
-                    {{ trans('blocks.home.shop_now')|default('تسوق الآن') }}
+            
+            <div class="flex flex-wrap gap-4">
+                <a href="{{ link('/products') }}" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 overflow-hidden">
+                    <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+                    <span class="relative flex items-center gap-3">
+                        {{ trans('blocks.home.shop_now')|default('Shop Now') }}
+                        <i class="sicon-arrow-left group-hover:-translate-x-1 transition-transform rtl:rotate-180"></i>
+                    </span>
                 </a>
-                <a href="{{ link('/offers') }}" class="btn btn--outline light btn--rounded-full px-8 py-4 text-lg min-w-[160px]">
-                    {{ trans('blocks.home.view_offers')|default('العروض') }}
+                
+                <a href="{{ link('/offers') }}" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 backdrop-blur-sm hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/50">
+                    {{ trans('blocks.home.view_offers')|default('View Offers') }}
                 </a>
+            </div>
+            
+            {# Trust Indicators #}
+            <div class="mt-12 flex items-center gap-8 text-slate-400 text-sm border-t border-white/10 pt-8">
+                <div class="flex items-center gap-2">
+                    <i class="sicon-star text-yellow-400"></i>
+                    <span>4.9/5 Rating</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="sicon-shipping text-blue-400"></i>
+                    <span>Free Shipping</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="sicon-shield-check text-emerald-400"></i>
+                    <span>Secure Payment</span>
+                </div>
             </div>
         </div>
     </div>
+    
+    {# Scroll Indicator #}
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+        <a href="#featured-products" class="text-white/50 hover:text-white transition-colors">
+            <i class="sicon-arrow-down text-2xl"></i>
+        </a>
+    </div>
 </section>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fadeInUp {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+</style>

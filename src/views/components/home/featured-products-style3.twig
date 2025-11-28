@@ -19,19 +19,18 @@
             <div>
                 <div class="s-block__title">
                   <h2>{{ section.title }}</h2>
-                  {# <p>عنوان فرعي توصيفي صغير</p> #}
                 </div> 
                 <div class="flex-1 grid lg:grid-cols-2 gap-4 sm:gap-8">
                     {% if section.featured_product %}
-                        <custom-salla-product-card shadow-on-hover product="{{section.featured_product}}" fullImage></custom-salla-product-card>
+                        {% include 'components.product.card' with {'product': section.featured_product, 'full_image': true} %}
                         <div class="grid gap-4 sm:gap-8">
                             {% for product in section.products|slice(0,3) %}
-                                <custom-salla-product-card shadow-on-hover product="{{product}}" minimal></custom-salla-product-card>
+                                {% include 'components.product.card' with {'product': product, 'minimal': true} %}
                             {% endfor %}
                         </div>
                     {% else %}
                         {% for product in section.products %}
-                            <custom-salla-product-card shadow-on-hover product="{{product}}" minimal></custom-salla-product-card>
+                            {% include 'components.product.card' with {'product': product, 'minimal': true} %}
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -39,4 +38,3 @@
         {% endfor %}
     </div>
 </section>
- 

@@ -1,0 +1,78 @@
+{#
+| Variable | Type    | Description |
+|----------|---------|-------------|
+| product  | Product |             |
+#}
+<div class="group relative bg-white rounded-2xl border border-gray-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col overflow-hidden">
+    {# Badges #}
+    <div class="absolute top-3 left-3 z-10 flex flex-col gap-2">
+        {% if product.is_on_sale %}
+            <span class="px-3 py-1 text-xs font-bold text-white bg-red-500 rounded-full shadow-sm">
+                {{ product.promotion_title|default('SALE') }}
+            </span>
+        {% endif %}
+        {% if product.badge %}
+            <span class="px-3 py-1 text-xs font-bold text-white bg-blue-500 rounded-full shadow-sm">
+                {{ product.badge }}
+            </span>
+        {% endif %}
+    </div>
+
+    {# Wishlist Button #}
+    <button class="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-gray-400 hover:text-red-500 hover:bg-white transition-all duration-200 shadow-sm opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0"
+            onclick="salla.wishlist.toggle({{ product.id }})"
+            data-id="{{ product.id }}">
+        <i class="sicon-heart"></i>
+    </button>
+
+    {# Image #}
+    <a href="{{ product.url }}" class="relative block w-full aspect-[4/5] overflow-hidden bg-gray-50">
+        <img src="{{ product.image.url }}" 
+             alt="{{ product.image.alt }}" 
+             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+        
+        {# Quick Add Overlay #}
+        <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-20">
+            <salla-add-product-button 
+                product-id="{{ product.id }}"
+                product-status="{{ product.status }}"
+                product-type="{{ product.type }}"
+                class="w-full btn btn--primary btn--rounded-full shadow-lg !py-3">
+                {{ trans('pages.products.add_to_cart') }}
+            </salla-add-product-button>
+        </div>
+    </a>
+
+    {# Content #}
+    <div class="p-5 flex flex-col flex-1">
+        {# Category #}
+        {% if product.category %}
+            <a href="{{ product.category.url }}" class="text-xs text-gray-400 hover:text-blue-600 mb-1 transition-colors">
+                {{ product.category.name }}
+            </a>
+        {% endif %}
+
+        {# Title #}
+        <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+            <a href="{{ product.url }}">{{ product.name }}</a>
+        </h3>
+
+        {# Rating #}
+        <div class="mb-3">
+            <div class="flex items-center gap-1 text-yellow-400 text-xs">
+                <i class="sicon-star"></i>
+                <span class="text-gray-500 font-medium">{{ product.rating|number_format(1) }}</span>
+            </div>
+        </div>
+
+        {# Price #}
+        <div class="mt-auto flex items-center gap-2">
+            <div class="flex flex-col">
+                {% if product.is_on_sale %}
+                    <span class="text-xs text-gray-400 line-through decoration-red-500/50">{{ product.regular_price|money }}</span>
+                {% endif %}
+                <span class="text-lg font-bold text-slate-900">{{ product.price|money }}</span>
+            </div>
+        </div>
+    </div>
+</div>
